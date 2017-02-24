@@ -31,3 +31,19 @@ class TestPlayer(Object):
             self.xvelocity += -1.0 * self.MOVE_SPEED * step_factor
         if keyboard.get_pressed(self.right_key):
             self.xvelocity += 1.0 * self.MOVE_SPEED * step_factor
+
+class SmallEnemy(Object):
+    MOVE_SPEED = 2
+
+    def __init__(self, name, x, y, scale):
+
+        smallenemy_sprite = Sprite(directory=SPRITE_PATH, name=name, width=scale, height=scale)
+
+        super(SmallEnemy, self).__init__(
+            x, y, sprite=smallenemy_sprite, checks_collisions=False)
+
+    def event_step(self, time_passed, delta_multi):
+        """ Implement basic thruster-style movement """
+        # Figure out what fraction of a second has passed
+        step_factor = time_passed / 1000
+        self.xvelocity = 0.5
